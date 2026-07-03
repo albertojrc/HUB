@@ -35,6 +35,7 @@ import { ModelsPage } from './pages/ModelsPage.jsx';
 import { ProjectsPage } from './pages/ProjectsPage.jsx';
 import { ResourcesPage } from './pages/ResourcesPage.jsx';
 import { RiskManagementPage } from './pages/RiskManagementPage.jsx';
+import { UseCaseDetailPage } from './pages/UseCaseDetailPage.jsx';
 import { UseCasesPage } from './pages/UseCasesPage.jsx';
 
 const normalizePath = (path) => {
@@ -71,6 +72,11 @@ function renderRoute(path, navigate) {
     return <ModelDetailPage modelId={modelId} onNavigate={navigate} />;
   }
 
+  if (path.startsWith('/use-cases/') && path !== '/use-cases') {
+    const useCaseId = path.replace('/use-cases/', '');
+    return <UseCaseDetailPage useCaseId={useCaseId} onNavigate={navigate} />;
+  }
+
   switch (path) {
     case '/':
       return <DashboardPage onNavigate={navigate} />;
@@ -81,7 +87,7 @@ function renderRoute(path, navigate) {
     case '/models':
       return <ModelsPage onNavigate={navigate} />;
     case '/use-cases':
-      return <UseCasesPage />;
+      return <UseCasesPage onNavigate={navigate} />;
     case '/risk-management':
       return <RiskManagementPage />;
     case '/labs':

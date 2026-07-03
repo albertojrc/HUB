@@ -30,6 +30,7 @@ import { phases, phaseStats } from './data/phases.js';
 import { EvaluationsPage } from './pages/EvaluationsPage.jsx';
 import { GlossaryPage } from './pages/GlossaryPage.jsx';
 import { LabsPage } from './pages/LabsPage.jsx';
+import { ModelDetailPage } from './pages/ModelDetailPage.jsx';
 import { ModelsPage } from './pages/ModelsPage.jsx';
 import { ProjectsPage } from './pages/ProjectsPage.jsx';
 import { ResourcesPage } from './pages/ResourcesPage.jsx';
@@ -65,6 +66,11 @@ export default function App() {
 }
 
 function renderRoute(path, navigate) {
+  if (path.startsWith('/models/') && path !== '/models') {
+    const modelId = path.replace('/models/', '');
+    return <ModelDetailPage modelId={modelId} onNavigate={navigate} />;
+  }
+
   switch (path) {
     case '/':
       return <DashboardPage onNavigate={navigate} />;
@@ -73,7 +79,7 @@ function renderRoute(path, navigate) {
     case '/lessons/linear-regression':
       return <LinearRegressionLessonPage onNavigate={navigate} />;
     case '/models':
-      return <ModelsPage />;
+      return <ModelsPage onNavigate={navigate} />;
     case '/use-cases':
       return <UseCasesPage />;
     case '/risk-management':

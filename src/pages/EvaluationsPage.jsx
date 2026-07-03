@@ -1,9 +1,37 @@
+import { useMemo, useState } from 'react';
 import { CheckCircle2, ClipboardCheck, GraduationCap, Target } from 'lucide-react';
 import { evaluations } from '../data/evaluations.js';
 import { StatCard } from '../components/AcademyComponents.jsx';
+import { EmptyResults, FilterToolbar, includesQuery } from '../components/FilterControls.jsx';
+
+const evaluationStatuses = [...new Set(evaluations.map((evaluation) => evaluation.status))];
 
 export function EvaluationsPage() {
+  const [query, setQuery] = useState('');
+  const [status, setStatus] = useState('all');
   const available = evaluations.filter((evaluation) => evaluation.status === 'disponible').length;
+
+  const filteredEvaluations = useMemo(() => {
+    return evaluations.filter((evaluation) => {
+      const matchesStatus = status === 'all' || evaluation.status === status;
+      const matchesSearch = includesQuery([
+        evaluation.title,
+        evaluation.level,
+        evaluation.format,
+        evaluation.objective,
+        evaluation.questions,
+        evaluation.passCriteria,
+        evaluation.status,
+      ], query);
+
+      return matchesStatus && matchesSearch;
+    });
+  }, [query, status]);
+
+  const clearFilters = () => {
+    setQuery('');
+    setStatus('all');
+  };
 
   return (
     <div className="evaluations-page">
@@ -18,8 +46,8 @@ export function EvaluationsPage() {
         </div>
         <div className="hero-stats-mini">
           <span><strong>{evaluations.length}</strong> evaluaciones</span>
+          <span><strong>{filteredEvaluations.length}</strong> visibles</span>
           <span><strong>{available}</strong> disponibles</span>
-          <span><strong>Skill check</strong> enfoque</span>
         </div>
       </section>
 
@@ -30,37 +58,54 @@ export function EvaluationsPage() {
         <StatCard label="Validación" value="F14" detail="Evidencia, hallazgos y controles" icon={CheckCircle2} />
       </section>
 
-      <section className="evaluation-grid">
-        {evaluations.map((evaluation) => (
-          <article className={`evaluation-card status-${evaluation.status}`} key={evaluation.id}>
-            <div className="model-card-header">
-              <span>{evaluation.level}</span>
-              <strong>{evaluation.status}</strong>
-            </div>
-            <h3>{evaluation.title}</h3>
-            <p>{evaluation.objective}</p>
+      <FilterToolbar
+        searchValue={query}
+        onSearchChange={setQuery}
+        searchPlaceholder="Buscar evaluación, fase, pregunta, criterio o tema..."
+        filterLabel="Estado"
+        filterValue={status}
+        onFilterChange={setStatus}
+        filterOptions={evaluationStatuses}
+        resultCount={filteredEvaluations.length}
+        totalCount={evaluations.length}
+        onClear={clearFilters}
+      />
 
-            <div className="evaluation-format">
-              <ClipboardCheck size={18} />
-              <span>{evaluation.format}</span>
-            </div>
-
-            <div>
-              <h4>Preguntas clave</h4>
-              <ol className="timeline-list compact-timeline">
-                {evaluation.questions.map((question) => <li key={question}>{question}</li>)}
-              </ol>
-            </div>
-
-            <div>
-              <h4>Criterios para aprobar</h4>
-              <div className="chip-row">
-                {evaluation.passCriteria.map((criteria) => <span key={criteria}>{criteria}</span>)}
+      {filteredEvaluations.length === 0 ? (
+        <EmptyResults title="No encontré evaluaciones" description="Prueba con fundamentos, riesgo, estadística, modelos, validación, MLOps o governance." />
+      ) : (
+        <section className="evaluation-grid">
+          {filteredEvaluations.map((evaluation) => (
+            <article className={`evaluation-card status-${evaluation.status}`} key={evaluation.id}>
+              <div className="model-card-header">
+                <span>{evaluation.level}</span>
+                <strong>{evaluation.status}</strong>
               </div>
-            </div>
-          </article>
-        ))}
-      </section>
+              <h3>{evaluation.title}</h3>
+              <p>{evaluation.objective}</p>
+
+              <div className="evaluation-format">
+                <ClipboardCheck size={18} />
+                <span>{evaluation.format}</span>
+              </div>
+
+              <div>
+                <h4>Preguntas clave</h4>
+                <ol className="timeline-list compact-timeline">
+                  {evaluation.questions.map((question) => <li key={question}>{question}</li>)}
+                </ol>
+              </div>
+
+              <div>
+                <h4>Criterios para aprobar</h4>
+                <div className="chip-row">
+                  {evaluation.passCriteria.map((criteria) => <span key={criteria}>{criteria}</span>)}
+                </div>
+              </div>
+            </article>
+          ))}
+        </section>
+      )}
     </div>
   );
 }

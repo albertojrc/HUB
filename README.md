@@ -102,6 +102,17 @@ Se añadieron páginas individuales para cada modelo de la biblioteca:
 
 Cada playbook incluye fórmula o lógica, mental model, decisión bancaria, workflow, validación, governance checklist, red flags y ángulo para entrevista o comité.
 
+### Sprint 5: búsqueda y filtros
+
+Se añadieron controles funcionales para navegar contenido de forma más rápida:
+
+- Búsqueda y filtros por categoría en **Modelos**.
+- Búsqueda y filtros por categoría en **Glosario**.
+- Búsqueda y filtros por estado en **Labs**.
+- Búsqueda y filtros por categoría en **Recursos**.
+- Estados vacíos cuando no hay resultados.
+- Contadores dinámicos de resultados visibles.
+
 ## Estructura del proyecto
 
 ```txt
@@ -116,8 +127,10 @@ Cada playbook incluye fórmula o lógica, mental model, decisión bancaria, work
     ├── main.jsx
     ├── styles.css
     ├── featureStyles.css
+    ├── filterStyles.css
     ├── components
-    │   └── AcademyComponents.jsx
+    │   ├── AcademyComponents.jsx
+    │   └── FilterControls.jsx
     ├── data
     │   ├── evaluations.js
     │   ├── glossary.js
@@ -183,14 +196,14 @@ npm run dev
 
 - El contenido vive separado del layout en `src/data`.
 - Las páginas principales viven en `src/pages`.
-- Los componentes reutilizables están centralizados en `src/components/AcademyComponents.jsx`.
+- Los componentes reutilizables están centralizados en `src/components`.
 - La navegación usa History API para mantener rutas limpias sin añadir React Router todavía.
 - El diseño evita Tailwind para no introducir configuración adicional en una primera base limpia.
 - Las secciones futuras ya tienen rutas preparadas para escalar el hub sin rediseñar la estructura.
 
 ## Próximos pasos recomendados
 
-1. Añadir filtros y búsqueda funcional para modelos, glosario, labs y proyectos.
+1. Añadir filtros y búsqueda funcional para proyectos, evaluaciones y use cases.
 2. Crear contenido real tipo notebook dentro de cada lab.
 3. Crear evaluaciones interactivas con respuestas y feedback.
 4. Añadir persistencia de progreso del usuario con localStorage o una base de datos ligera.

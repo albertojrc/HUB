@@ -2,19 +2,32 @@
 .use-case-board,
 .risk-grid,
 .project-roadmap,
-.glossary-grid {
+.glossary-grid,
+.lab-grid,
+.resource-grid,
+.evaluation-grid,
+.quick-actions-grid {
   display: grid;
   gap: 18px;
   margin-top: 22px;
 }
 
-.model-grid {
+.model-grid,
+.lab-grid,
+.resource-grid,
+.evaluation-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .use-case-board,
 .risk-grid,
-.glossary-grid {
+.glossary-grid,
+.quick-actions-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.use-case-board,
+.risk-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
@@ -27,7 +40,11 @@
 .risk-topic-card,
 .project-card,
 .glossary-card,
-.category-panel {
+.category-panel,
+.lab-card,
+.resource-card,
+.evaluation-card,
+.quick-action-card {
   border: 1px solid rgba(226, 232, 240, 0.92);
   border-radius: 26px;
   background: rgba(255, 255, 255, 0.9);
@@ -38,20 +55,67 @@
 .use-case-card,
 .risk-topic-card,
 .glossary-card,
-.category-panel {
+.category-panel,
+.lab-card,
+.resource-card,
+.evaluation-card,
+.quick-action-card {
   padding: 22px;
 }
 
-.model-card {
+.model-card,
+.lab-card,
+.resource-card,
+.evaluation-card,
+.quick-action-card {
   display: grid;
   gap: 16px;
 }
 
-.model-card-header {
+.quick-action-card {
+  min-height: 148px;
+  color: inherit;
+  text-align: left;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.quick-action-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.quick-action-card svg {
+  color: #075985;
+}
+
+.quick-action-card span,
+.quick-action-card strong {
+  display: block;
+}
+
+.quick-action-card span {
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.quick-action-card strong {
+  color: var(--ink);
+  font-size: 1.05rem;
+  letter-spacing: -0.035em;
+}
+
+.model-card-header,
+.lab-title-row,
+.lab-meta-row,
+.resource-footer,
+.evaluation-format {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 12px;
+}
+
+.model-card-header {
+  justify-content: space-between;
 }
 
 .model-card-header span,
@@ -82,7 +146,10 @@
 .risk-topic-card h3,
 .project-card h3,
 .glossary-card h3,
-.category-panel h3 {
+.category-panel h3,
+.lab-card h3,
+.resource-card h3,
+.evaluation-card h3 {
   margin: 0;
   color: var(--ink);
   letter-spacing: -0.04em;
@@ -91,7 +158,10 @@
 .model-card h3,
 .use-case-card h3,
 .risk-topic-card h3,
-.project-card h3 {
+.project-card h3,
+.lab-card h3,
+.resource-card h3,
+.evaluation-card h3 {
   font-size: clamp(1.3rem, 2.8vw, 1.9rem);
 }
 
@@ -99,7 +169,10 @@
 .use-case-card p,
 .risk-topic-card p,
 .project-card p,
-.glossary-card p {
+.glossary-card p,
+.lab-card p,
+.resource-card p,
+.evaluation-card p {
   margin: 0;
   color: var(--muted);
   line-height: 1.68;
@@ -116,11 +189,18 @@
 
 .model-section h4,
 .use-case-columns h4,
-.risk-topic-card h4 {
-  margin: 0;
+.risk-topic-card h4,
+.lab-card h4,
+.resource-card h4,
+.evaluation-card h4 {
+  margin: 0 0 10px;
   color: #0f172a;
   font-size: 0.88rem;
   letter-spacing: -0.02em;
+}
+
+.model-section h4 {
+  margin-bottom: 0;
 }
 
 .model-lists,
@@ -149,6 +229,14 @@
   padding-left: 18px;
   color: #334155;
   line-height: 1.5;
+}
+
+.compact-timeline {
+  gap: 10px;
+}
+
+.compact-timeline li {
+  font-size: 0.94rem;
 }
 
 .chip-row {
@@ -181,7 +269,10 @@
 }
 
 .governance-note,
-.example-box {
+.example-box,
+.lab-output,
+.resource-footer,
+.evaluation-format {
   display: flex;
   gap: 10px;
   padding: 14px;
@@ -271,24 +362,83 @@
   font-size: 1.7rem;
 }
 
-.example-box {
+.example-box,
+.lab-output {
   flex-direction: column;
   border: 1px solid rgba(16, 185, 129, 0.18);
   background: rgba(209, 250, 229, 0.62);
 }
 
-.example-box strong {
+.example-box strong,
+.lab-output strong {
   color: #047857;
 }
 
-.example-box span {
+.example-box span,
+.lab-output p {
   color: #14532d;
   line-height: 1.55;
 }
 
+.lab-icon {
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  color: #075985;
+  border-radius: 18px;
+  background: #e0f2fe;
+}
+
+.lab-meta-row {
+  flex-wrap: wrap;
+}
+
+.lab-meta-row span,
+.resource-footer,
+.evaluation-format {
+  color: #334155;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  font-weight: 850;
+}
+
+.lab-meta-row span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 11px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+}
+
+.resource-footer,
+.evaluation-format {
+  align-items: center;
+  width: fit-content;
+}
+
+.resource-footer {
+  color: #075985;
+  background: #e0f2fe;
+}
+
+.evaluation-format {
+  color: #5b21b6;
+  background: #ede9fe;
+}
+
+.status-disponible .model-card-header strong,
+.status-listo-para-construir .model-card-header strong {
+  color: #047857;
+  background: #d1fae5;
+}
+
 @media (max-width: 1280px) {
   .use-case-board,
-  .risk-grid {
+  .risk-grid,
+  .quick-actions-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -302,7 +452,10 @@
   .use-case-board,
   .risk-grid,
   .glossary-grid,
-  .glossary-layout {
+  .glossary-layout,
+  .lab-grid,
+  .resource-grid,
+  .evaluation-grid {
     grid-template-columns: 1fr;
   }
 
@@ -313,7 +466,8 @@
 
 @media (max-width: 720px) {
   .model-lists,
-  .project-card {
+  .project-card,
+  .quick-actions-grid {
     grid-template-columns: 1fr;
   }
 
@@ -326,7 +480,15 @@
   .risk-topic-card,
   .project-content,
   .glossary-card,
-  .category-panel {
+  .category-panel,
+  .lab-card,
+  .resource-card,
+  .evaluation-card,
+  .quick-action-card {
     padding: 18px;
+  }
+
+  .lab-title-row {
+    align-items: flex-start;
   }
 }

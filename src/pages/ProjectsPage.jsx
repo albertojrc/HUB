@@ -1,8 +1,36 @@
+import { useMemo, useState } from 'react';
 import { FolderKanban, GraduationCap, Rocket, ShieldCheck } from 'lucide-react';
 import { portfolioProjects } from '../data/projects.js';
 import { StatCard } from '../components/AcademyComponents.jsx';
+import { EmptyResults, FilterToolbar, includesQuery } from '../components/FilterControls.jsx';
+
+const projectStatuses = [...new Set(portfolioProjects.map((project) => project.status))];
 
 export function ProjectsPage() {
+  const [query, setQuery] = useState('');
+  const [status, setStatus] = useState('all');
+
+  const filteredProjects = useMemo(() => {
+    return portfolioProjects.filter((project) => {
+      const matchesStatus = status === 'all' || project.status === status;
+      const matchesSearch = includesQuery([
+        project.title,
+        project.level,
+        project.businessQuestion,
+        project.deliverables,
+        project.skills,
+        project.status,
+      ], query);
+
+      return matchesStatus && matchesSearch;
+    });
+  }, [query, status]);
+
+  const clearFilters = () => {
+    setQuery('');
+    setStatus('all');
+  };
+
   return (
     <div className="projects-page">
       <section className="page-hero glass-card compact">
@@ -16,7 +44,7 @@ export function ProjectsPage() {
         </div>
         <div className="hero-stats-mini">
           <span><strong>{portfolioProjects.length}</strong> proyectos</span>
-          <span><strong>1</strong> prioritario</span>
+          <span><strong>{filteredProjects.length}</strong> visibles</span>
           <span><strong>End-to-end</strong> enfoque</span>
         </div>
       </section>
@@ -28,36 +56,53 @@ export function ProjectsPage() {
         <StatCard label="Deployment" value="04" detail="API, batch scoring o monitoring" icon={Rocket} />
       </section>
 
-      <section className="project-roadmap">
-        {portfolioProjects.map((project, index) => (
-          <article className={`project-card status-${project.status}`} key={project.id}>
-            <div className="project-index">{String(index + 1).padStart(2, '0')}</div>
-            <div className="project-content">
-              <div className="model-card-header">
-                <span>{project.level}</span>
-                <strong>{project.status}</strong>
-              </div>
-              <h3>{project.title}</h3>
-              <p>{project.businessQuestion}</p>
+      <FilterToolbar
+        searchValue={query}
+        onSearchChange={setQuery}
+        searchPlaceholder="Buscar proyecto, skill, entregable o pregunta de negocio..."
+        filterLabel="Estado"
+        filterValue={status}
+        onFilterChange={setStatus}
+        filterOptions={projectStatuses}
+        resultCount={filteredProjects.length}
+        totalCount={portfolioProjects.length}
+        onClear={clearFilters}
+      />
 
-              <div className="use-case-columns">
-                <div>
-                  <h4>Entregables</h4>
-                  <ul className="compact-list">
-                    {project.deliverables.map((deliverable) => <li key={deliverable}>{deliverable}</li>)}
-                  </ul>
+      {filteredProjects.length === 0 ? (
+        <EmptyResults title="No encontré proyectos" description="Prueba con credit scoring, fraud, churn, segmentation, forecasting, RAG o governance." />
+      ) : (
+        <section className="project-roadmap">
+          {filteredProjects.map((project, index) => (
+            <article className={`project-card status-${project.status}`} key={project.id}>
+              <div className="project-index">{String(index + 1).padStart(2, '0')}</div>
+              <div className="project-content">
+                <div className="model-card-header">
+                  <span>{project.level}</span>
+                  <strong>{project.status}</strong>
                 </div>
-                <div>
-                  <h4>Skills que demuestra</h4>
-                  <div className="chip-row">
-                    {project.skills.map((skill) => <span key={skill}>{skill}</span>)}
+                <h3>{project.title}</h3>
+                <p>{project.businessQuestion}</p>
+
+                <div className="use-case-columns">
+                  <div>
+                    <h4>Entregables</h4>
+                    <ul className="compact-list">
+                      {project.deliverables.map((deliverable) => <li key={deliverable}>{deliverable}</li>)}
+                    </ul>
+                  </div>
+                  <div>
+                    <h4>Skills que demuestra</h4>
+                    <div className="chip-row">
+                      {project.skills.map((skill) => <span key={skill}>{skill}</span>)}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </article>
-        ))}
-      </section>
+            </article>
+          ))}
+        </section>
+      )}
     </div>
   );
 }

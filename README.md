@@ -17,6 +17,7 @@ La app está diseñada como una academia personal moderna: sidebar oscuro, topba
 - `/learning-path` — Ruta de aprendizaje con las 16 fases.
 - `/lessons/linear-regression` — Lección completa: Regresión Lineal aplicada a banca.
 - `/models` — Biblioteca real de modelos de Machine Learning aplicados a banca.
+- `/models/:modelId` — Playbook individual para cada modelo.
 - `/use-cases` — Casos de uso bancarios conectando negocio, datos, modelos, métricas y governance.
 - `/risk-management` — Mapa de riesgos bancarios con conceptos, analítica y controles.
 - `/labs` — Labs profesionales con ejercicios guiados y outputs esperados.
@@ -85,6 +86,22 @@ Se añadieron páginas reales para:
 - **Evaluaciones**: quizzes y checklists por fase para comprobar dominio conceptual, técnico y de governance.
 - **Dashboard actions**: accesos rápidos desde el home hacia Modelos, Use Cases, Labs y Recursos.
 
+### Sprint 4: model playbooks
+
+Se añadieron páginas individuales para cada modelo de la biblioteca:
+
+- Regresión Lineal
+- Regresión Logística
+- Árbol de Decisión
+- Random Forest
+- Gradient Boosting / XGBoost / LightGBM
+- K-Means
+- Isolation Forest
+- ARIMA / SARIMA
+- RAG Banking Assistant
+
+Cada playbook incluye fórmula o lógica, mental model, decisión bancaria, workflow, validación, governance checklist, red flags y ángulo para entrevista o comité.
+
 ## Estructura del proyecto
 
 ```txt
@@ -106,6 +123,7 @@ Se añadieron páginas reales para:
     │   ├── glossary.js
     │   ├── labs.js
     │   ├── lessons.js
+    │   ├── modelPlaybooks.js
     │   ├── models.js
     │   ├── phases.js
     │   ├── projects.js
@@ -116,6 +134,7 @@ Se añadieron páginas reales para:
         ├── EvaluationsPage.jsx
         ├── GlossaryPage.jsx
         ├── LabsPage.jsx
+        ├── ModelDetailPage.jsx
         ├── ModelsPage.jsx
         ├── ProjectsPage.jsx
         ├── ResourcesPage.jsx
@@ -171,11 +190,11 @@ npm run dev
 
 ## Próximos pasos recomendados
 
-1. Convertir cada modelo de la biblioteca en una lección individual.
-2. Añadir filtros y búsqueda funcional para modelos, glosario, labs y proyectos.
-3. Crear contenido real tipo notebook dentro de cada lab.
+1. Añadir filtros y búsqueda funcional para modelos, glosario, labs y proyectos.
+2. Crear contenido real tipo notebook dentro de cada lab.
+3. Crear evaluaciones interactivas con respuestas y feedback.
 4. Añadir persistencia de progreso del usuario con localStorage o una base de datos ligera.
-5. Crear evaluaciones interactivas con respuestas y feedback.
+5. Crear páginas individuales para cada caso de uso bancario.
 6. Añadir tests visuales o capturas cuando el diseño esté más consolidado.
 
 ## Objetivo del hub

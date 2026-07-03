@@ -1,8 +1,8 @@
-import { BrainCircuit, Gauge, ShieldCheck, Target } from 'lucide-react';
+import { ArrowRight, BrainCircuit, Gauge, ShieldCheck, Target } from 'lucide-react';
 import { models } from '../data/models.js';
 import { InfoCard, StatCard } from '../components/AcademyComponents.jsx';
 
-export function ModelsPage() {
+export function ModelsPage({ onNavigate }) {
   return (
     <div className="models-page">
       <section className="page-hero glass-card compact">
@@ -11,12 +11,12 @@ export function ModelsPage() {
           <h2>Modelos de Machine Learning para banca</h2>
           <p>
             Compara modelos por tarea, caso de uso, métricas, fortalezas, limitaciones y requisitos de gobierno.
-            La idea es aprender no solo cómo funcionan, sino cuándo conviene usarlos en un banco.
+            Cada tarjeta ahora abre un playbook individual para estudiar el modelo con profundidad.
           </p>
         </div>
         <div className="hero-stats-mini">
           <span><strong>{models.length}</strong> modelos</span>
-          <span><strong>4</strong> familias principales</span>
+          <span><strong>Playbooks</strong> individuales</span>
           <span><strong>100%</strong> aplicado a banca</span>
         </div>
       </section>
@@ -69,6 +69,11 @@ export function ModelsPage() {
               <ShieldCheck size={18} />
               <p>{model.governance}</p>
             </div>
+
+            <button className="model-open-button" type="button" onClick={() => onNavigate(`/models/${model.id}`)}>
+              Abrir playbook
+              <ArrowRight size={18} />
+            </button>
           </article>
         ))}
       </section>

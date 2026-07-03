@@ -3,8 +3,6 @@ import {
   BookOpen,
   BrainCircuit,
   Building2,
-  FlaskConical,
-  GraduationCap,
   Layers3,
   Library,
   LineChart,
@@ -22,7 +20,6 @@ import {
   LessonHeader,
   LessonNavigation,
   LessonTabs,
-  PlaceholderPage,
   ProgressCard,
   RiskCard,
   StatCard,
@@ -30,9 +27,12 @@ import {
 } from './components/AcademyComponents.jsx';
 import { featuredLessons, linearRegressionLesson } from './data/lessons.js';
 import { phases, phaseStats } from './data/phases.js';
+import { EvaluationsPage } from './pages/EvaluationsPage.jsx';
 import { GlossaryPage } from './pages/GlossaryPage.jsx';
+import { LabsPage } from './pages/LabsPage.jsx';
 import { ModelsPage } from './pages/ModelsPage.jsx';
 import { ProjectsPage } from './pages/ProjectsPage.jsx';
+import { ResourcesPage } from './pages/ResourcesPage.jsx';
 import { RiskManagementPage } from './pages/RiskManagementPage.jsx';
 import { UseCasesPage } from './pages/UseCasesPage.jsx';
 
@@ -79,13 +79,13 @@ function renderRoute(path, navigate) {
     case '/risk-management':
       return <RiskManagementPage />;
     case '/labs':
-      return <PlaceholderPage title="Labs" description="Espacio para notebooks, ejercicios prácticos, datasets simulados y retos guiados de análisis bancario." icon={FlaskConical} />;
+      return <LabsPage />;
     case '/projects':
       return <ProjectsPage />;
     case '/evaluations':
-      return <PlaceholderPage title="Evaluaciones" description="Quizzes, checklists de dominio, ejercicios de interpretación y mini-exámenes por fase." icon={GraduationCap} />;
+      return <EvaluationsPage />;
     case '/resources':
-      return <PlaceholderPage title="Recursos" description="Plantillas de model card, reporte de validación, monitoring report, data dictionary y documentación técnica." icon={Library} />;
+      return <ResourcesPage />;
     case '/glossary':
       return <GlossaryPage />;
     default:
@@ -133,6 +133,29 @@ function DashboardPage({ onNavigate }) {
         <StatCard label="En progreso" value={phaseStats.inProgress} detail="Fases activas ahora" icon={Workflow} />
         <StatCard label="Lecciones destacadas" value={featuredLessons.length} detail="Contenido inicial creado" icon={BookOpen} />
         <StatCard label="Nivel objetivo" value="Experto" detail="MLOps, validación y regulación" icon={Target} />
+      </section>
+
+      <section className="quick-actions-grid">
+        <button type="button" className="quick-action-card" onClick={() => onNavigate('/models')}>
+          <BrainCircuit size={24} />
+          <span>Biblioteca de modelos</span>
+          <strong>Comparar algoritmos</strong>
+        </button>
+        <button type="button" className="quick-action-card" onClick={() => onNavigate('/use-cases')}>
+          <Building2 size={24} />
+          <span>Use cases bancarios</span>
+          <strong>Negocio + datos</strong>
+        </button>
+        <button type="button" className="quick-action-card" onClick={() => onNavigate('/labs')}>
+          <Workflow size={24} />
+          <span>Labs guiados</span>
+          <strong>Practicar end-to-end</strong>
+        </button>
+        <button type="button" className="quick-action-card" onClick={() => onNavigate('/resources')}>
+          <Library size={24} />
+          <span>Plantillas</span>
+          <strong>Documentar como banco</strong>
+        </button>
       </section>
 
       <section className="content-split">

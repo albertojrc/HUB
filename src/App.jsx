@@ -3,7 +3,6 @@ import {
   BookOpen,
   BrainCircuit,
   Building2,
-  Database,
   FlaskConical,
   GraduationCap,
   Layers3,

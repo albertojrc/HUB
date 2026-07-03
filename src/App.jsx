@@ -5,7 +5,6 @@ import {
   Building2,
   Database,
   FlaskConical,
-  FolderKanban,
   GraduationCap,
   Layers3,
   Library,
@@ -32,6 +31,11 @@ import {
 } from './components/AcademyComponents.jsx';
 import { featuredLessons, linearRegressionLesson } from './data/lessons.js';
 import { phases, phaseStats } from './data/phases.js';
+import { GlossaryPage } from './pages/GlossaryPage.jsx';
+import { ModelsPage } from './pages/ModelsPage.jsx';
+import { ProjectsPage } from './pages/ProjectsPage.jsx';
+import { RiskManagementPage } from './pages/RiskManagementPage.jsx';
+import { UseCasesPage } from './pages/UseCasesPage.jsx';
 
 const normalizePath = (path) => {
   if (!path || path === '/index.html') return '/';
@@ -70,21 +74,21 @@ function renderRoute(path, navigate) {
     case '/lessons/linear-regression':
       return <LinearRegressionLessonPage onNavigate={navigate} />;
     case '/models':
-      return <PlaceholderPage title="Modelos" description="Biblioteca para comparar algoritmos clásicos, modelos de riesgo, NLP, forecasting y técnicas de explainability." icon={BrainCircuit} />;
+      return <ModelsPage />;
     case '/use-cases':
-      return <PlaceholderPage title="Banking Use Cases" description="Mapa de casos de uso para default, fraude, churn, AML, segmentación, liquidez, ventas y monitoreo." icon={Building2} />;
+      return <UseCasesPage />;
     case '/risk-management':
-      return <PlaceholderPage title="Risk Management" description="Sección dedicada a riesgo de crédito, mercado, liquidez, operacional, modelo y regulación." icon={ShieldCheck} />;
+      return <RiskManagementPage />;
     case '/labs':
       return <PlaceholderPage title="Labs" description="Espacio para notebooks, ejercicios prácticos, datasets simulados y retos guiados de análisis bancario." icon={FlaskConical} />;
     case '/projects':
-      return <PlaceholderPage title="Proyectos" description="Portfolio profesional con proyectos de Credit Scoring, Fraud Detection, Churn, Forecasting y RAG Banking Assistant." icon={FolderKanban} />;
+      return <ProjectsPage />;
     case '/evaluations':
       return <PlaceholderPage title="Evaluaciones" description="Quizzes, checklists de dominio, ejercicios de interpretación y mini-exámenes por fase." icon={GraduationCap} />;
     case '/resources':
       return <PlaceholderPage title="Recursos" description="Plantillas de model card, reporte de validación, monitoring report, data dictionary y documentación técnica." icon={Library} />;
     case '/glossary':
-      return <PlaceholderPage title="Glosario" description="Diccionario vivo de conceptos de Data Science, banking, finanzas, riesgo, regulación y MLOps." icon={Database} />;
+      return <GlossaryPage />;
     default:
       return <DashboardPage onNavigate={navigate} />;
   }

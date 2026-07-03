@@ -13,16 +13,16 @@ La app está diseñada como una academia personal moderna: sidebar oscuro, topba
 
 ## Páginas incluidas
 
-- `/` — Dashboard principal del hub.
+- `/` — Dashboard principal del hub con accesos rápidos.
 - `/learning-path` — Ruta de aprendizaje con las 16 fases.
 - `/lessons/linear-regression` — Lección completa: Regresión Lineal aplicada a banca.
 - `/models` — Biblioteca real de modelos de Machine Learning aplicados a banca.
 - `/use-cases` — Casos de uso bancarios conectando negocio, datos, modelos, métricas y governance.
 - `/risk-management` — Mapa de riesgos bancarios con conceptos, analítica y controles.
-- `/labs` — Sección preparada para notebooks y ejercicios.
+- `/labs` — Labs profesionales con ejercicios guiados y outputs esperados.
 - `/projects` — Roadmap de portfolio profesional con proyectos end-to-end.
-- `/evaluations` — Sección preparada para quizzes y evaluaciones.
-- `/resources` — Sección preparada para plantillas y materiales.
+- `/evaluations` — Evaluaciones y checklists para medir dominio por fase.
+- `/resources` — Recursos y plantillas de documentación, validación y governance.
 - `/glossary` — Glosario técnico Banking Data Science.
 
 ## Contenido desarrollado
@@ -76,6 +76,15 @@ Se añadieron páginas reales para:
 - **Proyectos**: roadmap de portfolio con entregables y skills demostrables.
 - **Glosario**: términos esenciales como PD, LGD, EAD, Expected Loss, WOE, IV, KS, Gini, PSI, SHAP, BCBS 239 y RAG.
 
+### Sprint 3: práctica, recursos y evaluaciones
+
+Se añadieron páginas reales para:
+
+- **Labs**: ejercicios guiados de SQL, PD modeling, fraude, churn, forecasting y MLOps monitoring.
+- **Recursos**: plantillas de model card, validation report, monitoring report, data dictionary, feature engineering checklist, model risk checklist y GenAI risk guide.
+- **Evaluaciones**: quizzes y checklists por fase para comprobar dominio conceptual, técnico y de governance.
+- **Dashboard actions**: accesos rápidos desde el home hacia Modelos, Use Cases, Labs y Recursos.
+
 ## Estructura del proyecto
 
 ```txt
@@ -93,17 +102,23 @@ Se añadieron páginas reales para:
     ├── components
     │   └── AcademyComponents.jsx
     ├── data
+    │   ├── evaluations.js
     │   ├── glossary.js
+    │   ├── labs.js
     │   ├── lessons.js
     │   ├── models.js
     │   ├── phases.js
     │   ├── projects.js
+    │   ├── resources.js
     │   ├── riskTopics.js
     │   └── useCases.js
     └── pages
+        ├── EvaluationsPage.jsx
         ├── GlossaryPage.jsx
+        ├── LabsPage.jsx
         ├── ModelsPage.jsx
         ├── ProjectsPage.jsx
+        ├── ResourcesPage.jsx
         ├── RiskManagementPage.jsx
         └── UseCasesPage.jsx
 ```
@@ -156,13 +171,12 @@ npm run dev
 
 ## Próximos pasos recomendados
 
-1. Crear página real de **Labs** con notebooks y ejercicios guiados.
-2. Crear página real de **Recursos** con plantillas descargables o copiables.
-3. Crear evaluaciones por fase con preguntas tipo quiz.
-4. Convertir cada modelo de la biblioteca en una lección individual.
-5. Añadir persistencia de progreso del usuario con localStorage o una base de datos ligera.
-6. Agregar filtros y búsqueda funcional para modelos, glosario y proyectos.
-7. Añadir tests visuales o capturas cuando el diseño esté más consolidado.
+1. Convertir cada modelo de la biblioteca en una lección individual.
+2. Añadir filtros y búsqueda funcional para modelos, glosario, labs y proyectos.
+3. Crear contenido real tipo notebook dentro de cada lab.
+4. Añadir persistencia de progreso del usuario con localStorage o una base de datos ligera.
+5. Crear evaluaciones interactivas con respuestas y feedback.
+6. Añadir tests visuales o capturas cuando el diseño esté más consolidado.
 
 ## Objetivo del hub
 

@@ -44,7 +44,8 @@
 .lab-card,
 .resource-card,
 .evaluation-card,
-.quick-action-card {
+.quick-action-card,
+.related-model-card {
   border: 1px solid rgba(226, 232, 240, 0.92);
   border-radius: 26px;
   background: rgba(255, 255, 255, 0.9);
@@ -59,7 +60,8 @@
 .lab-card,
 .resource-card,
 .evaluation-card,
-.quick-action-card {
+.quick-action-card,
+.related-model-card {
   padding: 22px;
 }
 
@@ -67,38 +69,53 @@
 .lab-card,
 .resource-card,
 .evaluation-card,
-.quick-action-card {
+.quick-action-card,
+.related-model-card {
   display: grid;
   gap: 16px;
 }
 
-.quick-action-card {
-  min-height: 148px;
+.quick-action-card,
+.related-model-card,
+.model-open-button,
+.back-link {
   color: inherit;
   text-align: left;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.quick-action-card:hover {
+.quick-action-card {
+  min-height: 148px;
+}
+
+.quick-action-card:hover,
+.related-model-card:hover,
+.model-open-button:hover,
+.back-link:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow);
 }
 
-.quick-action-card svg {
+.quick-action-card svg,
+.related-model-card svg {
   color: #075985;
 }
 
 .quick-action-card span,
-.quick-action-card strong {
+.quick-action-card strong,
+.related-model-card span,
+.related-model-card strong {
   display: block;
 }
 
-.quick-action-card span {
+.quick-action-card span,
+.related-model-card span {
   color: var(--muted);
   font-weight: 800;
 }
 
-.quick-action-card strong {
+.quick-action-card strong,
+.related-model-card strong {
   color: var(--ink);
   font-size: 1.05rem;
   letter-spacing: -0.035em;
@@ -108,7 +125,9 @@
 .lab-title-row,
 .lab-meta-row,
 .resource-footer,
-.evaluation-format {
+.evaluation-format,
+.model-open-button,
+.back-link {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -172,7 +191,8 @@
 .glossary-card p,
 .lab-card p,
 .resource-card p,
-.evaluation-card p {
+.evaluation-card p,
+.related-model-card p {
   margin: 0;
   color: var(--muted);
   line-height: 1.68;
@@ -435,10 +455,86 @@
   background: #d1fae5;
 }
 
+.model-open-button,
+.back-link {
+  width: fit-content;
+  justify-content: center;
+  min-height: 42px;
+  padding: 0 15px;
+  color: #ffffff;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--blue), var(--cyan));
+  font-weight: 900;
+}
+
+.back-link {
+  margin-bottom: 18px;
+  color: #0f172a;
+  border: 1px solid #e2e8f0;
+  background: rgba(255, 255, 255, 0.88);
+}
+
+.model-detail-hero {
+  align-items: stretch;
+}
+
+.formula-panel {
+  min-width: min(360px, 100%);
+  display: grid;
+  align-content: center;
+  gap: 10px;
+  padding: 22px;
+  color: white;
+  border-radius: 24px;
+  background:
+    linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(30, 64, 175, 0.94)),
+    radial-gradient(circle at top right, rgba(56, 189, 248, 0.36), transparent 12rem);
+}
+
+.formula-panel span {
+  color: #93c5fd;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.formula-panel strong {
+  font-size: clamp(1.45rem, 4vw, 2.5rem);
+  letter-spacing: -0.06em;
+  line-height: 1.05;
+}
+
+.model-detail-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(330px, 0.42fr);
+  gap: 22px;
+  margin-top: 22px;
+}
+
+.model-detail-main,
+.model-detail-side {
+  display: grid;
+  gap: 16px;
+  align-content: start;
+}
+
+.related-models-section {
+  margin-top: 28px;
+}
+
+.related-models-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
 @media (max-width: 1280px) {
   .use-case-board,
   .risk-grid,
-  .quick-actions-grid {
+  .quick-actions-grid,
+  .related-models-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -455,7 +551,9 @@
   .glossary-layout,
   .lab-grid,
   .resource-grid,
-  .evaluation-grid {
+  .evaluation-grid,
+  .model-detail-layout,
+  .related-models-grid {
     grid-template-columns: 1fr;
   }
 
@@ -484,7 +582,8 @@
   .lab-card,
   .resource-card,
   .evaluation-card,
-  .quick-action-card {
+  .quick-action-card,
+  .related-model-card {
     padding: 18px;
   }
 

@@ -19,6 +19,7 @@ La app está diseñada como una academia personal moderna: sidebar oscuro, topba
 - `/models` — Biblioteca real de modelos de Machine Learning aplicados a banca.
 - `/models/:modelId` — Playbook individual para cada modelo.
 - `/use-cases` — Casos de uso bancarios conectando negocio, datos, modelos, métricas y governance.
+- `/use-cases/:useCaseId` — Playbook individual para cada caso de uso bancario.
 - `/risk-management` — Mapa de riesgos bancarios con conceptos, analítica y controles.
 - `/labs` — Labs profesionales con ejercicios guiados y outputs esperados.
 - `/projects` — Roadmap de portfolio profesional con proyectos end-to-end.
@@ -113,6 +114,17 @@ Se añadieron controles funcionales para navegar contenido de forma más rápida
 - Estados vacíos cuando no hay resultados.
 - Contadores dinámicos de resultados visibles.
 
+### Sprint 6: use case playbooks y filtros extendidos
+
+Se añadieron mejoras de navegación y profundidad:
+
+- Búsqueda y filtros por dominio en **Banking Use Cases**.
+- Búsqueda y filtros por estado en **Projects**.
+- Búsqueda y filtros por estado en **Evaluations**.
+- Playbooks individuales para cada caso de uso bancario.
+- Rutas dinámicas `/use-cases/:useCaseId`.
+- Cada use case playbook incluye stakeholders, decisión ejecutiva, workflow, features clave, métricas de negocio, controles, red flags y entregables.
+
 ## Estructura del proyecto
 
 ```txt
@@ -142,6 +154,7 @@ Se añadieron controles funcionales para navegar contenido de forma más rápida
     │   ├── projects.js
     │   ├── resources.js
     │   ├── riskTopics.js
+    │   ├── useCasePlaybooks.js
     │   └── useCases.js
     └── pages
         ├── EvaluationsPage.jsx
@@ -152,6 +165,7 @@ Se añadieron controles funcionales para navegar contenido de forma más rápida
         ├── ProjectsPage.jsx
         ├── ResourcesPage.jsx
         ├── RiskManagementPage.jsx
+        ├── UseCaseDetailPage.jsx
         └── UseCasesPage.jsx
 ```
 
@@ -203,12 +217,11 @@ npm run dev
 
 ## Próximos pasos recomendados
 
-1. Añadir filtros y búsqueda funcional para proyectos, evaluaciones y use cases.
-2. Crear contenido real tipo notebook dentro de cada lab.
-3. Crear evaluaciones interactivas con respuestas y feedback.
-4. Añadir persistencia de progreso del usuario con localStorage o una base de datos ligera.
-5. Crear páginas individuales para cada caso de uso bancario.
-6. Añadir tests visuales o capturas cuando el diseño esté más consolidado.
+1. Crear contenido real tipo notebook dentro de cada lab.
+2. Crear evaluaciones interactivas con respuestas y feedback.
+3. Añadir persistencia de progreso del usuario con localStorage o una base de datos ligera.
+4. Crear páginas individuales para recursos/plantillas con contenido copiables.
+5. Añadir tests visuales o capturas cuando el diseño esté más consolidado.
 
 ## Objetivo del hub
 
